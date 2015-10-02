@@ -27,7 +27,7 @@ public class Main {
         Reader in = new FileReader(path);
         Iterable<CSVRecord> records = CSVFormat.EXCEL.withHeader().parse(in);
         for (CSVRecord record : records) {
-            arrayList.add(String.format("%s %s - %s", record.get("First Name"), record.get("Last Name"), record.get("Email")));
+            arrayList.add(record.get("NAME"));
         }
 
         return arrayList;
