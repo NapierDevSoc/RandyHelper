@@ -1,10 +1,8 @@
 package uk.napierdevsoc;
 
-import com.sun.xml.internal.bind.v2.TODO;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 
-import java.awt.*;
 import java.io.FileReader;
 import java.io.Reader;
 import java.util.ArrayList;
@@ -12,13 +10,15 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        // get some randy hot bits
-        RandyHotBits randyHotBits = new RandyHotBits(256);
-        String hotBits = randyHotBits.getHotBits();
-
         ArrayList<String> arrayList = parseMembersList(args[0]);
 
-        // TODO Implement shuffle on the list using the hot bits
+        RandyHotBits randyHotBits = new RandyHotBits(1);
+        String hotBits = randyHotBits.getHotBits();
+
+        int decimal = Integer.valueOf(hotBits, 16);
+        int index = decimal % arrayList.size();
+
+        System.out.println(arrayList.get(index));
     }
 
     private static ArrayList<String> parseMembersList(String path) throws Exception {
