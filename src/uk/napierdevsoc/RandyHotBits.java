@@ -1,12 +1,9 @@
 package uk.napierdevsoc;
 
-import org.jsoup.*;
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
-/**
- * Created by wyrda on 01/10/2015.
- */
 public class RandyHotBits {
     private String hotBits;
 
