@@ -5,12 +5,14 @@ import org.apache.commons.csv.CSVRecord;
 
 import java.io.FileReader;
 import java.io.Reader;
-import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        ArrayList<String> arrayList = parseMembersList(args[0]);
+        List<String> arrayList = parseMembersList(args[0]);
 
         RandyHotBits randyHotBits = new RandyHotBits(1);
         String hotBits = randyHotBits.getHotBits();
@@ -19,17 +21,14 @@ public class Main {
         int index = decimal % arrayList.size();
 
         System.out.println(arrayList.get(index));
-    }
+	}
 
-    private static ArrayList<String> parseMembersList(String path) throws Exception {
-        ArrayList<String> arrayList = new ArrayList();
-
+    private static List<String> parseMembersList(String path) throws Exception {
         Reader in = new FileReader(path);
         Iterable<CSVRecord> records = CSVFormat.EXCEL.withHeader().parse(in);
-        for (CSVRecord record : records) {
-            arrayList.add(record.get("NAME"));
-        }
 
-        return arrayList;
-    }
+        return StreamSupport.stream(records.spliterator(), false)
+        	    .map(r -> r.get("NAME"))
+        	    .collect(Collectors.toList());
+	}
 }

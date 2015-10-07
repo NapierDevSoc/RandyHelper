@@ -5,6 +5,9 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 public class RandyHotBits {
+	
+    private static final String URL = "https://www.fourmilab.ch/cgi-bin/Hotbits?nbytes=%d&fmt=hex";
+	
     private String hotBits;
 
     public RandyHotBits(int bytes) throws Exception {
@@ -12,7 +15,7 @@ public class RandyHotBits {
     }
 
     private String requestHotBits(int bytes) throws Exception {
-        Document doc = Jsoup.connect(String.format("https://www.fourmilab.ch/cgi-bin/Hotbits?nbytes=%d&fmt=hex", bytes)).get();
+        Document doc = Jsoup.connect(String.format(URL, bytes)).get();
         Elements data = doc.select("pre");
 
         return data.text();
